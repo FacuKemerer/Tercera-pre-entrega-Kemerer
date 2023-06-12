@@ -1,3 +1,16 @@
 from django.db import models
 
-# Create your models here.
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=20)
+    apellido = models.CharField(max_length=20)
+    telefono = models.IntegerField()
+
+class Auto(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=False)
+    patente = models.TextField(max_length=7)
+
+class HistorialTrabajos(models.Model):
+    auto = models.ForeignKey(Auto, on_delete=models.CASCADE, null=False)
+    descripcion = models.TextField()
+    fecha = models.DateField(auto_now_add=True)
+
